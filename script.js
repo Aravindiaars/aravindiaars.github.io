@@ -18,7 +18,7 @@ const copyImageToClipBoardOtherBrowsers = () => {
 	try {
 	alert(isNotFirefox);
   if(isNotFirefox) {
-	   alert("2");
+	   alert("1.8");
     navigator?.permissions
       ?.query({ name: "clipboard-write" })
       .then(async (result) => {
