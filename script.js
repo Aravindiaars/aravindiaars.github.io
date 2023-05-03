@@ -11,47 +11,21 @@ clipboard.on('success', function(e) {
 clipboard.on('error', function(e) {
   console.log(e);
 });
-
-function Normal() {
-	
-	 try {
-  var copyText = document.getElementById("copyme");
-  var range = document.createRange();
-  var selection = window.getSelection();
-  range.selectNodeContents(copyText);  
-  selection.removeAllRanges();
-  selection.addRange(range);
-  document.execCommand("copy");
-		   } catch (e) {
-		 alert("Error Normal:"+e.message);
-    }
-}
-
-
 const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 
 
 const copyImageToClipBoardOtherBrowsers = () => {
 	try {
-	alert("1.7");
-		if (!navigator.clipboard) {
-    alert("Clipboard API not available");
-
-  }
-		
+	alert(isNotFirefox);
   if(isNotFirefox) {
-	 
+	   alert("2");
     navigator?.permissions
       ?.query({ name: "clipboard-write" })
       .then(async (result) => {
-	      alert("1");
         if (result.state === "granted") {
-		 alert("2");
           const type = "image/png";
           const blob = await snapshotCreator();
-		alert("After snap");
           let data = [new ClipboardItem({ [type]: blob })];
-		 alert("Copied to clipboard.");
           navigator.clipboard
             .write(data)
             .then(() => {
@@ -59,8 +33,8 @@ const copyImageToClipBoardOtherBrowsers = () => {
             })
             .catch((err) => {
               // Error
-              console.error("Error copyImageToClipBoardOtherBrowsers:", err);
-			  alert("Error copyImageToClipBoardOtherBrowsers:"+err);
+              console.error("Error:", err);
+			  alert(err);
             });
         }
     });
@@ -69,7 +43,7 @@ const copyImageToClipBoardOtherBrowsers = () => {
   }
 	}
 	catch(err) {
-  alert("Error copyMain:"+err.message);
+  alert(err.message);
 }
 }
 
@@ -80,7 +54,7 @@ const snapshotCreator = () => {
     try {
 		 alert("snapshotCreator");
       const scale = window.devicePixelRatio;
-      const element = document.getElementById("test1"); // You can use element's ID or Class here
+      const element = document.getElementById("copyme"); // You can use element's ID or Class here
       domtoimage
         .toBlob(element, {
           height: element.offsetHeight * scale,
@@ -96,7 +70,7 @@ const snapshotCreator = () => {
           resolve(blob);
         });
     } catch (e) {
-		 alert("Error snapshotCreator:"+e.message);
+		 alert(e.message);
       reject(e);
     }
   });
