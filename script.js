@@ -29,50 +29,32 @@ async function copyImage(data) {
 
 const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 
-
-const copyImageToClipBoardOtherBrowsers = () => {
-	try {
-	alert(isNotFirefox);
-  if(isNotFirefox) {
-	   alert("2");
-	  
-	  navigator.permissions.query({ name: 'clipboard-write' })
-  .then(permissionStatus => {
-    if (permissionStatus.state === 'granted') {
-     alert("Clipboard-write permission has been granted");
-      // You can proceed with copying the image to the clipboard
-    } else if (permissionStatus.state === 'prompt') {
-     alert("The user will be prompted to grant the permission");
-      // You may want to show a message to the user here
-    } else {
-     alert("Clipboard-write permission has been denied");
-      // You won't be able to copy the image to the clipboard
-    }
-  })
-  .catch(error => {
-    console.error(error);
-  });
-	  
-	  
-	  
-    navigator?.permissions
-      ?.query({ name: "clipboard-write" })
-      .then(async (result) => {
-        if (result.state === "granted") {
-          const type = "image/png";
-          const blob = await snapshotCreator();
-          let data = [new ClipboardItem({ [type]: blob })];
-         copyImage(data);
-        }
-    });
-  } else {
-    alert("Firefox does not support this functionality");
+const copyImageToClipBoardOtherBrowsers = async () => {
+	alert("START");
+  if (!navigator.clipboard) {
+    alert("Clipboard API not supported");
+    return;
   }
-	}
-	catch(err) {
-  alert(err.message);
-}
-}
+
+  try {
+    const type = 'image/png';
+    const blob = await snapshotCreator();
+    const clipboardItem = new ClipboardItem({ [type]: blob });
+
+    await navigator.clipboard.write([clipboardItem]);
+    
+    console.log('Image copied to clipboard');
+  } catch (error) {
+    alert("Failed to copy image to clipboard: "+ error);
+
+    // Check if the error is related to document focus
+    if (error.message === 'Document is not focused.') {
+     alert("Show a message to the user informing them that the clipboard operation requires document focus");
+    }
+  }
+};
+
+
 
 
 
