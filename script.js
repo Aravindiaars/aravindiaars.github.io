@@ -33,7 +33,7 @@ const copyImageToClipBoardOtherBrowsers = () => {
             })
             .catch((err) => {
               // Error
-              console.error("Error:", err);
+              console.error("Error copyImageToClipBoardOtherBrowsers:", err);
 			  alert(err);
             });
         }
@@ -70,7 +70,7 @@ const snapshotCreator = () => {
           resolve(blob);
         });
     } catch (e) {
-		 alert(e.message);
+		 alert("Error snapshotCreator:"+e.message);
       reject(e);
     }
   });
