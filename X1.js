@@ -30,7 +30,7 @@ function copyImageAndEMailLinkToClipboard() {
 
 }
 
-tion convertURIToImageData(URI) {
+function convertURIToImageData(URI) {
     return new Promise(function (resolve, reject) {
         if (URI == null) return reject();
         var canvas = document.createElement('canvas'),
