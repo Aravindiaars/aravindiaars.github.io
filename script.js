@@ -33,7 +33,7 @@ const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 
 const copyImageToClipBoardOtherBrowsers = () => {
 	try {
-	alert("1.4");
+	alert("1.5");
 		if (!navigator.clipboard) {
     alert("Clipboard API not available");
 
@@ -50,7 +50,9 @@ const copyImageToClipBoardOtherBrowsers = () => {
 		 alert("2");
           const type = "image/png";
           const blob = await snapshotCreator();
+		alert("After snap");
           let data = [new ClipboardItem({ [type]: blob })];
+		alert("3");
           navigator.clipboard
             .write(data)
             .then(() => {
