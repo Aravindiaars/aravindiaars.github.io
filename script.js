@@ -12,27 +12,7 @@ clipboard.on('error', function(e) {
   console.log(e);
 });
 
-
-async function copyImage1() {
-  let input = document.getElementById("file");
-  if (!input.files?.length) {
-    alert("Select files before copy");
-  }
-  const blob = new Blob(["sample 2"], { type: "text/plain" });
-  let clipboardItem = new ClipboardItem({
-    ["text/plain"]: blob,
-    ["image/png"]: input.files[0]
-  });
-  let response = await navigator.clipboard.write([clipboardItem]);
-  console.log(response);
-}
-async function paste() {
- const data = await navigator.clipboard.read();
-  console.log(data);
-}
-
 async function copyImage(data) {
-	alert(data);
   let response = await  navigator.clipboard
             .write(data)
             .then(() => {
@@ -55,6 +35,26 @@ const copyImageToClipBoardOtherBrowsers = () => {
 	alert(isNotFirefox);
   if(isNotFirefox) {
 	   alert("2");
+	  
+	  navigator.permissions.query({ name: 'clipboard-write' })
+  .then(permissionStatus => {
+    if (permissionStatus.state === 'granted') {
+      // Clipboard-write permission has been granted
+      // You can proceed with copying the image to the clipboard
+    } else if (permissionStatus.state === 'prompt') {
+      // The user will be prompted to grant the permission
+      // You may want to show a message to the user here
+    } else {
+      // Clipboard-write permission has been denied
+      // You won't be able to copy the image to the clipboard
+    }
+  })
+  .catch(error => {
+    console.error(error);
+  });
+	  
+	  
+	  
     navigator?.permissions
       ?.query({ name: "clipboard-write" })
       .then(async (result) => {
