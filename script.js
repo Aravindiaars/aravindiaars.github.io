@@ -12,7 +12,22 @@ clipboard.on('error', function(e) {
   console.log(e);
 });
 
-async function copyImage(data) {
+async function copyImageToClipBoardOtherBrowsers() {
+	alert("NEW");
+  let input = document.getElementById("copyme");
+  if(!input.files?.length){
+    alert('Select files before copy')
+  }
+  const blob = new Blob(["sample 2"], { type: "text/plain" });
+  let clipboardItem = new ClipboardItem({
+    ["text/plain"]: blob,
+    ["image/png"]: input.files[0]
+  });
+  let response = await navigator.clipboard.write([clipboardItem]);
+  console.log(response);
+}
+
+async function copyImage1(data) {
 	alert(data);
   let response = await  navigator.clipboard
             .write(data)
@@ -31,7 +46,7 @@ async function copyImage(data) {
 const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 
 
-const copyImageToClipBoardOtherBrowsers = () => {
+const copyImageToClipBoardOtherBrowsers1 = () => {
 	try {
 	alert(isNotFirefox);
   if(isNotFirefox) {
