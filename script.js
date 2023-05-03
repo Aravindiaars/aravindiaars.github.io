@@ -39,13 +39,13 @@ const copyImageToClipBoardOtherBrowsers = () => {
 	  navigator.permissions.query({ name: 'clipboard-write' })
   .then(permissionStatus => {
     if (permissionStatus.state === 'granted') {
-      // Clipboard-write permission has been granted
+     alert("Clipboard-write permission has been granted");
       // You can proceed with copying the image to the clipboard
     } else if (permissionStatus.state === 'prompt') {
-      // The user will be prompted to grant the permission
+     alert("The user will be prompted to grant the permission");
       // You may want to show a message to the user here
     } else {
-      // Clipboard-write permission has been denied
+     alert("Clipboard-write permission has been denied");
       // You won't be able to copy the image to the clipboard
     }
   })
