@@ -16,7 +16,7 @@ const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 
 const copyImageToClipBoardOtherBrowsers = () => {
 	try {
-	alert(isNotFirefox);
+	alert("1.0");
   if(isNotFirefox) {
 	   alert("2");
     navigator?.permissions
