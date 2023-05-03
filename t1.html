@@ -23,7 +23,7 @@
         const type = 'image/png';
         const imageBlob = await fetch(imageUrl).then(response => response.blob());
         const linkData = linkUrl + '\n'; // add a newline character to separate the link from the image
-        const combinedBlob = new Blob([imageBlob, linkData], { type: 'text/plain' });
+        const combinedBlob = new Blob([imageBlob, linkData], { type: 'image/png' });
 
         // Check if the browser is a mobile browser (you can customize this check if necessary)
         const isMobileBrowser = /Mobi|Android/i.test(navigator.userAgent);
