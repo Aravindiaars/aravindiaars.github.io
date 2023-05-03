@@ -21,3 +21,32 @@ function copyImageAndEMailLinkToClipboard() {
     await copyImageAndLinkAsHTML(img, viewUrl);
   });
 }
+
+function convertURIToImageData(URI) {
+    return new Promise(function (resolve, reject) {
+        if (URI == null) return reject();
+        var canvas = document.createElement('canvas'),
+            context = canvas.getContext('2d'),
+            image = new Image();
+        image.addEventListener('load', function () {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(context.getImageData(0, 0, canvas.width, canvas.height));
+        }, false);
+        image.src = URI;
+    });
+}
+
+function imagedata_to_image(imagedata) {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    canvas.width = imagedata.width;
+    canvas.height = imagedata.height;
+    ctx.putImageData(imagedata, 0, 0);
+
+    var image = new Image();
+    image.src = canvas.toDataURL();
+    return image;
+}
+
