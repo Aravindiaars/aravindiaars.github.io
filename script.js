@@ -11,10 +11,22 @@ clipboard.on('success', function(e) {
 clipboard.on('error', function(e) {
   console.log(e);
 });
+
+function copyImageToClipBoardOtherBrowsers() {
+  var copyText = document.getElementById("copyme");
+  var range = document.createRange();
+  var selection = window.getSelection();
+  range.selectNodeContents(copyText);  
+  selection.removeAllRanges();
+  selection.addRange(range);
+  document.execCommand("copy");
+}
+
+
 const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 
 
-const copyImageToClipBoardOtherBrowsers = () => {
+const copyImageToClipBoardOtherBrowsers1 = () => {
 	try {
 	alert("1.1");
 		if (!navigator.clipboard) {
