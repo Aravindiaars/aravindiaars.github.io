@@ -52,7 +52,7 @@ const copyImageToClipBoardOtherBrowsers = () => {
           const blob = await snapshotCreator();
 		alert("After snap");
           let data = [new ClipboardItem({ [type]: blob })];
-		alert("3");
+		 alert("Copied to clipboard.");
           navigator.clipboard
             .write(data)
             .then(() => {
@@ -81,7 +81,7 @@ const snapshotCreator = () => {
     try {
 		 alert("snapshotCreator");
       const scale = window.devicePixelRatio;
-      const element = document.getElementById("copyme"); // You can use element's ID or Class here
+      const element = document.getElementById("test1"); // You can use element's ID or Class here
       domtoimage
         .toBlob(element, {
           height: element.offsetHeight * scale,
