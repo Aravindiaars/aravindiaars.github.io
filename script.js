@@ -13,6 +13,8 @@ clipboard.on('error', function(e) {
 });
 
 function copyImageToClipBoardOtherBrowsers() {
+	alert("1.3 Normal");
+	 try {
   var copyText = document.getElementById("copyme");
   var range = document.createRange();
   var selection = window.getSelection();
@@ -20,6 +22,9 @@ function copyImageToClipBoardOtherBrowsers() {
   selection.removeAllRanges();
   selection.addRange(range);
   document.execCommand("copy");
+		   } catch (e) {
+		 alert("Error Normal:"+e.message);
+    }
 }
 
 
@@ -28,7 +33,7 @@ const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 
 const copyImageToClipBoardOtherBrowsers1 = () => {
 	try {
-	alert("1.1");
+	alert("1.3");
 		if (!navigator.clipboard) {
     alert("Clipboard API not available");
 
