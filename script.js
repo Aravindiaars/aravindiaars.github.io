@@ -11,21 +11,9 @@ clipboard.on('success', function(e) {
 clipboard.on('error', function(e) {
   console.log(e);
 });
-const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 
-
-const copyImageToClipBoardOtherBrowsers = () => {
-	try {
-  if(isNotFirefox) {
-	   alert("1.13");
-    navigator?.permissions
-      ?.query({ name: "clipboard-write" })
-      .then(async (result) => {
-        if (result.state === "granted") {
-          const type = "image/png";
-          const blob = await snapshotCreator();
-          let data = [new ClipboardItem({ [type]: blob })];
-          navigator.clipboard
+async function copyImage(data) {
+  let response = await  navigator.clipboard
             .write(data)
             .then(() => {
              alert("Success");
@@ -35,6 +23,26 @@ const copyImageToClipBoardOtherBrowsers = () => {
               console.error("Error:", err);
 			  alert(err);
             });
+
+  console.log(response);
+}
+
+const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
+
+
+const copyImageToClipBoardOtherBrowsers = () => {
+	try {
+	alert(isNotFirefox);
+  if(isNotFirefox) {
+	   alert("2");
+    navigator?.permissions
+      ?.query({ name: "clipboard-write" })
+      .then(async (result) => {
+        if (result.state === "granted") {
+          const type = "image/png";
+          const blob = await snapshotCreator();
+          let data = [new ClipboardItem({ [type]: blob })];
+         copyImage(data);
         }
     });
   } else {
