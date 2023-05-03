@@ -13,6 +13,7 @@ clipboard.on('error', function(e) {
 });
 
 async function copyImage(data) {
+	alert(data);
   let response = await  navigator.clipboard
             .write(data)
             .then(() => {
