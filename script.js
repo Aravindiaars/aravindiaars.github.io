@@ -33,7 +33,7 @@ const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 
 const copyImageToClipBoardOtherBrowsers = () => {
 	try {
-	alert("1.5");
+	alert("1.7");
 		if (!navigator.clipboard) {
     alert("Clipboard API not available");
 
@@ -41,7 +41,6 @@ const copyImageToClipBoardOtherBrowsers = () => {
 		
   if(isNotFirefox) {
 	 
-	  Normal();
     navigator?.permissions
       ?.query({ name: "clipboard-write" })
       .then(async (result) => {
