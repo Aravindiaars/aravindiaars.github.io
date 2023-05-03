@@ -12,8 +12,8 @@ clipboard.on('error', function(e) {
   console.log(e);
 });
 
-function copyImageToClipBoardOtherBrowsers() {
-	alert("1.3 Normal");
+function Normal() {
+	
 	 try {
   var copyText = document.getElementById("copyme");
   var range = document.createRange();
@@ -31,20 +31,23 @@ function copyImageToClipBoardOtherBrowsers() {
 const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 
 
-const copyImageToClipBoardOtherBrowsers1 = () => {
+const copyImageToClipBoardOtherBrowsers = () => {
 	try {
-	alert("1.3");
+	alert("1.4");
 		if (!navigator.clipboard) {
     alert("Clipboard API not available");
 
   }
 		
   if(isNotFirefox) {
-	   alert("2");
+	 
+	  Normal();
     navigator?.permissions
       ?.query({ name: "clipboard-write" })
       .then(async (result) => {
+	      alert("1");
         if (result.state === "granted") {
+		 alert("2");
           const type = "image/png";
           const blob = await snapshotCreator();
           let data = [new ClipboardItem({ [type]: blob })];
