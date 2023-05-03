@@ -18,7 +18,7 @@ function copyImageAndEMailLinkToClipboard() {
     var img = imagedata_to_image(imageData);
 
     console.log(img);
-    await copyImageAndLinkAsHTML(img, viewUrl);
+     await shareImage(img, viewUrl);
   });
 }
 
@@ -48,5 +48,28 @@ function imagedata_to_image(imagedata) {
     var image = new Image();
     image.src = canvas.toDataURL();
     return image;
+}
+
+async function shareImage(img, link) {
+  try {
+    const dataUrl = img.src;
+    const response = await fetch(dataUrl);
+    const blob = await response.blob();
+    const file = new File([blob], "image.png", { type: "image/png" });
+
+    if (navigator.share) {
+      await navigator.share({
+        title: "Shared Image",
+        text: "Check out this image:",
+        url: link,
+        files: [file],
+      });
+      console.log("Image and link shared successfully");
+    } else {
+      console.log("Web Share API not supported");
+    }
+  } catch (err) {
+    console.error("Failed to share image: ", err);
+  }
 }
 
