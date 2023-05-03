@@ -43,7 +43,7 @@ const copyImageToClipBoardOtherBrowsers = () => {
   }
 	}
 	catch(err) {
-  alert(err.message);
+  alert("Error copyMain:"+err.message);
 }
 }
 
