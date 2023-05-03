@@ -17,7 +17,7 @@ const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
 const copyImageToClipBoardOtherBrowsers = () => {
 	try {
   if(isNotFirefox) {
-	   alert("1.9");
+	   alert("1.10");
     navigator?.permissions
       ?.query({ name: "clipboard-write" })
       .then(async (result) => {
@@ -27,8 +27,7 @@ const copyImageToClipBoardOtherBrowsers = () => {
           let data = [new ClipboardItem({ [type]: blob })];
 		alert("Snap");
 		const element1 = document.getElementById("copyme");
-		 element1.select();
-         element1.setSelectionRange(0, 99999);
+		
           navigator.clipboard
             .write(data)
             .then(() => {
