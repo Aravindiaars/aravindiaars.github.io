@@ -34,7 +34,7 @@ const copyImageToClipBoardOtherBrowsers = () => {
             .catch((err) => {
               // Error
               console.error("Error copyImageToClipBoardOtherBrowsers:", err);
-			  alert(err);
+			  alert("Error copyImageToClipBoardOtherBrowsers:"+err);
             });
         }
     });
