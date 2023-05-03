@@ -22,20 +22,15 @@
         linkElement.innerText = linkUrl;
         tempElement.appendChild(linkElement);
 
-        // Fetch the image data and create a Blob object
-        fetch(imageUrl)
-          .then((response) => response.blob())
-          .then((imageBlob) => {
-            // Copy the temporary element to the clipboard
-            navigator.clipboard.write([new ClipboardItem({
-              'image/png': imageBlob,
-              'text/plain': new Blob([linkUrl], {type: 'text/plain'})
-            })]).then(() => {
-              console.log('Image and link copied to clipboard');
-            }).catch((err) => {
-              console.error('Failed to copy image and link to clipboard: ', err);
-            });
-          });
+        // Copy the temporary element's HTML to the clipboard as text/html
+        navigator.clipboard.write([new ClipboardItem({
+          'text/html': new Blob([tempElement.innerHTML], {type: 'text/html'}),
+          'text/plain': new Blob([linkUrl], {type: 'text/plain'})
+        })]).then(() => {
+          console.log('Image and link copied to clipboard');
+        }).catch((err) => {
+          console.error('Failed to copy image and link to clipboard: ', err);
+        });
       }
 
       const copyButton = document.getElementById('copy-button');
