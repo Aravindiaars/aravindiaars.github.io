@@ -26,7 +26,7 @@ alert("Mobile");
     else
     {
     alert("Not Mobile");
-  await shareImage(img, viewUrl);
+ // await shareImage(img, viewUrl);
     }
   
      
