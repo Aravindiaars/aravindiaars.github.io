@@ -16,9 +16,20 @@ function copyImageAndEMailLinkToClipboard() {
   console.log("In");
   convertURIToImageData(imageUrl).then(async function (imageData) {
     var img = imagedata_to_image(imageData);
+ const isMobileBrowser = /Mobi|Android/i.test(navigator.userAgent);
 
-    console.log(img);
-     await shareImage(img, viewUrl);
+    if (isMobileBrowser)
+{
+alert("Mobile");
+  await shareImage(img, viewUrl);
+}
+    else
+    {
+    alert("Not Mobile");
+  await shareImage(img, viewUrl);
+    }
+  
+     
   });
 }
 
