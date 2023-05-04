@@ -21,7 +21,7 @@ function copyImageAndEMailLinkToClipboard() {
     if (isMobileBrowser)
 {
 alert("Mobile");
- await shareImage(img, viewUrl);
+  shareImage(img, viewUrl);
 
 }
     else
@@ -61,26 +61,26 @@ function imagedata_to_image(imagedata) {
     image.src = canvas.toDataURL();
     return image;
 }
-async function shareImage(img, link) {
-  try {
-    const dataUrl = img.src;
-    const response = await fetch(dataUrl);
-    const blob = await response.blob();
-    const file = new File([blob], "image.png", { type: "image/png" });
 
-    if (navigator.share) {
-      await navigator.share({
-        title: "Shared Image",
-        text: "Check out this image:",
-        url: link,
-        files: [file],
-      });
-      console.log("Image and link shared successfully");
-    } else {
-      console.log("Web Share API not supported");
-    }
-  } catch (err) {
-    console.error("Failed to share image: ", err);
-  }
+function shareImage(img, link) {
+  const dataUrl = img.src;
+  fetch(dataUrl)
+    .then(response => response.blob())
+    .then(blob => {
+      const file = new File([blob], "image.png", { type: "image/png" });
+      if (navigator.share) {
+        navigator.share({
+          title: "Shared Image",
+          text: "Check out this image:",
+          url: link,
+          files: [file],
+        })
+        .then(() => console.log("Image and link shared successfully"))
+        .catch(err => console.error("Failed to share image: ", err));
+      } else {
+        console.log("Web Share API not supported");
+      }
+    })
+    .catch(err => console.error("Failed to fetch image: ", err));
 }
 
