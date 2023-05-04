@@ -21,7 +21,8 @@ function copyImageAndEMailLinkToClipboard() {
     if (isMobileBrowser)
 {
 alert("Mobile");
-   shareImage(img, viewUrl);
+ await shareImage(img, viewUrl);
+
 }
     else
     {
@@ -60,16 +61,15 @@ function imagedata_to_image(imagedata) {
     image.src = canvas.toDataURL();
     return image;
 }
-
- function shareImage(img, link) {
+async function shareImage(img, link) {
   try {
     const dataUrl = img.src;
-    const response =  fetch(dataUrl);
-    const blob =  response.blob();
+    const response = await fetch(dataUrl);
+    const blob = await response.blob();
     const file = new File([blob], "image.png", { type: "image/png" });
 
     if (navigator.share) {
-       navigator.share({
+      await navigator.share({
         title: "Shared Image",
         text: "Check out this image:",
         url: link,
